@@ -1,0 +1,173 @@
+﻿<Window x:Class="ClientGUI.Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converter="clr-namespace:ClientGUI.MVVM.Converter"
+        xmlns:local="clr-namespace:ClientGUI"
+        xmlns:viewModel="clr-namespace:ClientGUI.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="Валидатор" Height="500" Width="500"
+        Background="Teal"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel />
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0" Background="White" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="40"/>
+                <RowDefinition MaxHeight="85"/>
+                <RowDefinition MaxHeight="60"/>
+                <RowDefinition MaxHeight="60"/>
+                <RowDefinition MaxHeight="60"/>
+                <RowDefinition MaxHeight="30"/>
+                <RowDefinition MaxHeight="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <!-- Приветствие -->
+            <StackPanel Grid.Row="0">
+                <Label Content="Введите данные:" 
+                       HorizontalAlignment="Center" 
+                       FontWeight="SemiBold"
+                       FontSize="16"
+                       FontStyle="Italic">
+                </Label>
+            </StackPanel>
+            
+            <!-- ФИО -->
+            <StackPanel Grid.Row="1" MinHeight="90" Background="WhiteSmoke" Orientation="Vertical" Margin="2">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Фамилия " Foreground="Teal" FontSize="13"></Label>
+                    <TextBox Text="{Binding SurenameProperty, UpdateSourceTrigger=PropertyChanged}"
+                             x:Name="SurenameTextBox"
+                             FontSize="13"
+                             MaxHeight="20"
+                             MinHeight="20"
+                             MinWidth="168.5">
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Имя " Foreground="Teal" FontSize="13"></Label>
+                    <TextBox Text="{Binding NameProperty, UpdateSourceTrigger=PropertyChanged}"
+                             x:Name="NameTextBox"
+                             FontSize="13"
+                             MaxHeight="20"
+                             MinHeight="20"
+                             MinWidth="197">
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Отчество " Foreground="Teal" FontSize="13"></Label>
+                    <TextBox Text="{Binding PatronymicProperty, UpdateSourceTrigger=PropertyChanged}"
+                             x:Name="PatronymicTextBox"
+                             FontSize="13"
+                             MaxHeight="20"
+                             MinHeight="20"
+                             MinWidth="167">
+                    </TextBox>
+                </StackPanel>
+            </StackPanel>
+            
+            <!-- Номер(-а) телефона(-ов) -->
+            <StackPanel Grid.Row="2" MaxHeight="60" Margin="2">
+                <Label 
+                    Content="Номер(-а) телефона(-ов)" 
+                    Foreground="Teal" 
+                    FontSize="13">
+                </Label>
+                <TextBox Text="{Binding TelephoneNumberProperty, UpdateSourceTrigger=PropertyChanged}"
+                         x:Name="TelephoneNumberTextBox"
+                         FontSize="13"
+                         MaxHeight="20"
+                         MinHeight="20">
+                </TextBox>
+            </StackPanel>
+            
+            <!-- Электронная(-ые) почта(-ы) -->
+            <StackPanel Grid.Row="3" Background="WhiteSmoke" MaxHeight="60" Margin="2">
+                <Label Content="Электронная(-ые) почта(-ы)" Foreground="Teal" FontSize="13"></Label>
+                <TextBox Text="{Binding EmailProperty, UpdateSourceTrigger=PropertyChanged}"
+                         x:Name="EmailTextBox"
+                         FontSize="13"
+                         MaxHeight="20"
+                         MinHeight="20">
+                </TextBox>
+            </StackPanel>
+            
+            <!-- Адрес(-а) -->
+            <StackPanel Grid.Row="4" MaxHeight="60" Margin="2">
+                <Label Content="Адрес(-а)" Foreground="Teal" FontSize="13"></Label>
+                <TextBox Text="{Binding AdressProperty, UpdateSourceTrigger=PropertyChanged}"
+                         x:Name="AdressTextBox"
+                         FontSize="13"
+                         MaxHeight="20"
+                         MinHeight="20">
+                </TextBox>
+            </StackPanel>
+            
+            <!-- Номер паспорта -->
+            <StackPanel Grid.Row="5" Background="WhiteSmoke" MaxHeight="30" Margin="2" Orientation="Horizontal">
+                <Label Content="Номер паспорта " Foreground="Teal" FontSize="13"></Label>
+                <PasswordBox Tag="{Binding PassportNumberProperty, UpdateSourceTrigger=PropertyChanged}"
+                         x:Name="PassportNumberTextBox"
+                         FontSize="13"
+                         MinWidth="123"
+                         MaxHeight="20"
+                         MinHeight="20"
+                         PasswordChar="*"
+                         MaxLength="6"> <!-- какой кайф! -->
+                </PasswordBox>
+            </StackPanel>
+            
+            <!-- Дата рождения -->
+            <StackPanel Grid.Row="6" MaxHeight="30" Margin="2" Orientation="Horizontal">
+                <Label Content="Дата рождения " Foreground="Teal" FontSize="13"></Label>
+                <TextBox Text="{Binding DateBirthdayProperty, UpdateSourceTrigger=PropertyChanged}"
+                         x:Name="DateBirthdayTextBox"
+                         FontSize="13"
+                         MinWidth="131"
+                         MaxHeight="20"
+                         MinHeight="20">
+                </TextBox>
+            </StackPanel>
+            
+            <!-- кнопка (старт валидации) -->
+            <Grid Grid.Row="7" Grid.Column="0" Background="WhiteSmoke">
+                <Button 
+                    Content="Валидация данных"
+                    FontWeight="SemiBold"
+                    FontSize="14"
+                    FontStyle="Italic"
+                    Width="150"
+                    Height="40"
+                    Background="{StaticResource gradientStyle}"
+                    Command="{Binding StartValidationCommand}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{converter:MultiConverterValidator}">
+                            <Binding Path="Text" ElementName="SurenameTextBox"/>
+                            <Binding Path="Text" ElementName="NameTextBox"/>
+                            <Binding Path="Text" ElementName="PatronymicTextBox"/>
+                            <Binding Path="Text" ElementName="TelephoneNumberTextBox"/>
+                            <Binding Path="Text" ElementName="EmailTextBox"/>
+                            <Binding Path="Text" ElementName="AdressTextBox"/>
+                            <Binding Path="Tag" ElementName="PassportNumberTextBox"/>
+                            <Binding Path="Text" ElementName="DateBirthdayTextBox"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+            </Grid>
+        </Grid>
+        
+    </Grid>
+    
+</Window>
