@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Windows;
 using System.Windows.Documents;
 using ClientGUI.MVVM.Core.Command;
 using ClientGUI.MVVM.Core.ViewModel;
+using Google.Protobuf.WellKnownTypes;
+using Grpc.Net.Client;
 
 namespace ClientGUI.MVVM.ViewModel
 {
@@ -17,6 +22,9 @@ namespace ClientGUI.MVVM.ViewModel
         
         #region Variables
         private List<string> _listObjects;
+        private List<string> _telephoneNumbers;
+        private List<string> _emails;
+        private List<string> _adrasses;
         #endregion
 
         /* свойтсва */
@@ -54,18 +62,86 @@ namespace ClientGUI.MVVM.ViewModel
                      !string.IsNullOrEmpty(DateBirthdayProperty));
         }
 
-        private void MyMethodForCheck()
+        private void SplitedProperties()
         {
-            MessageBox.Show(NameProperty.ToString());
+            _telephoneNumbers = TelephoneNumberProperty.Split(", ").ToList();
+            _emails = EmailProperty.Split(", ").ToList();
+            _adrasses = AdressProperty.Split(", ").ToList();
+            
         }
 
-        private void StartValidatorButtonMethod(object o)
+        // private DataRequest GetDataRequest()
+        // {
+        //     var emailsList = new List<string>();
+        //     foreach (var i in _emails)
+        //         emailsList.Add(i);
+        //     
+        //     var adrassList = new List<string>();
+        //     foreach (var i in _adrasses)
+        //         adrassList.Add(i);
+        //     
+        //     var numbersList = new List<string>();
+        //     foreach (var i in _telephoneNumbers)
+        //         numbersList.Add(i);
+        //
+        //     var time = DateTime.Parse(DateBirthdayProperty).ToTimestamp();
+        //     
+        //     var input = new DataRequest { Fullname = new Fullname{Name = NameProperty, 
+        //         Surname = SurenameProperty, Patronymic = PatronymicProperty}, Passport = PassportNumberProperty, BirthDate = time};
+        //     
+        //     foreach (var i in adrassList)
+        //         input.Addresses.Add(i);
+        //     
+        //     foreach (var i in emailsList)
+        //         input.Emails.Add(i);
+        //     
+        //     foreach (var i in numbersList)
+        //         input.TelephoneNumbers.Add(i);
+        //
+        //     return input;
+        // }
+
+        // void PrintReply(ValidateString reply, string name)
+        // {
+        //     Console.WriteLine();
+        //     Console.WriteLine($"{name}:");
+        //     Console.Write("Value = ");
+        //     Console.WriteLine(reply.Value);
+        //     Console.Write("Is valid: ");
+        //     Console.WriteLine(reply.IsValid);
+        //     if (reply.HasComment)
+        //     {
+        //         Console.Write("Comment: ");
+        //         Console.WriteLine(reply.Comment);
+        //     }
+        // }
+        
+        private async void StartValidatorButtonMethod(object o)
         {
             ValidatorStartedProperty = false;
-            var values = (object[]) o;
-            _listObjects = new List<string>(8);
-            for (int i = 0; i < 8; i++)
-                _listObjects[i] = (string)values[i];
+            _listObjects = new List<string> {NameProperty, SurenameProperty,
+                PatronymicProperty, TelephoneNumberProperty, EmailProperty, 
+                AdressProperty, PassportNumberProperty, DateBirthdayProperty };
+
+            //SplitedProperties();
+            // var input = GetDataRequest();
+            //
+            // var httpHandler = new HttpClientHandler();
+            // httpHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            //
+            // var channel = GrpcChannel.ForAddress("https://localhost:7298", new GrpcChannelOptions { HttpHandler = httpHandler });
+            // var client = new Validate.ValidateClient(channel);
+            //
+            // var reply = await client.ValidateAsync(input); /* await */
+            // PrintReply(reply.Fullname.Name, "Name");
+            // PrintReply(reply.Fullname.Surname, "Surname");
+            // PrintReply(reply.Fullname.Patronymic, "Patronymic");
+            //
+            // foreach (var email in reply.Addresses)
+            // {
+            //     PrintReply(email, "Email");
+            // }
+
         }
     }
 }

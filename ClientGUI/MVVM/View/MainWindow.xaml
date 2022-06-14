@@ -118,15 +118,14 @@
             <!-- Номер паспорта -->
             <StackPanel Grid.Row="5" Background="WhiteSmoke" MaxHeight="30" Margin="2" Orientation="Horizontal">
                 <Label Content="Номер паспорта " Foreground="Teal" FontSize="13"></Label>
-                <PasswordBox Tag="{Binding PassportNumberProperty, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding PassportNumberProperty, UpdateSourceTrigger=PropertyChanged}"
                          x:Name="PassportNumberTextBox"
                          FontSize="13"
                          MinWidth="123"
                          MaxHeight="20"
                          MinHeight="20"
-                         PasswordChar="*"
                          MaxLength="6"> <!-- какой кайф! -->
-                </PasswordBox>
+                </TextBox>
             </StackPanel>
             
             <!-- Дата рождения -->
@@ -152,18 +151,18 @@
                     Height="40"
                     Background="{StaticResource gradientStyle}"
                     Command="{Binding StartValidationCommand}">
-                    <Button.CommandParameter>
-                        <MultiBinding Converter="{converter:MultiConverterValidator}">
-                            <Binding Path="Text" ElementName="SurenameTextBox"/>
-                            <Binding Path="Text" ElementName="NameTextBox"/>
-                            <Binding Path="Text" ElementName="PatronymicTextBox"/>
-                            <Binding Path="Text" ElementName="TelephoneNumberTextBox"/>
-                            <Binding Path="Text" ElementName="EmailTextBox"/>
-                            <Binding Path="Text" ElementName="AdressTextBox"/>
-                            <Binding Path="Tag" ElementName="PassportNumberTextBox"/>
-                            <Binding Path="Text" ElementName="DateBirthdayTextBox"/>
-                        </MultiBinding>
-                    </Button.CommandParameter>
+                    <!-- <Button.CommandParameter> -->
+                    <!--     <MultiBinding Converter="{converter:MultiConverterValidator}"> -->
+                    <!--         <Binding Path="Text" ElementName="SurenameTextBox"/> -->
+                    <!--         <Binding Path="Text" ElementName="NameTextBox"/> -->
+                    <!--         <Binding Path="Text" ElementName="PatronymicTextBox"/> -->
+                    <!--         <Binding Path="Text" ElementName="TelephoneNumberTextBox"/> -->
+                    <!--         <Binding Path="Text" ElementName="EmailTextBox"/> -->
+                    <!--         <Binding Path="Text" ElementName="AdressTextBox"/> -->
+                    <!--         <Binding Path="Text" ElementName="PassportNumberTextBox"/> -->
+                    <!--         <Binding Path="Text" ElementName="DateBirthdayTextBox"/> -->
+                    <!--     </MultiBinding> -->
+                    <!-- </Button.CommandParameter> -->
                 </Button>
             </Grid>
         </Grid>
