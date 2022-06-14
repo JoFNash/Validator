@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientGUI", "ClientGUI\Clie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientGUI.MVVM.Core", "ClientGUI.MVVM.Core\ClientGUI.MVVM.Core.csproj", "{F283BF2A-F893-4F92-B64B-C106F82AC835}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StructsWPF", "StructsWPF\StructsWPF.csproj", "{7CD0D7B4-9DA1-4322-AB84-7D53AEA3BD76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{F283BF2A-F893-4F92-B64B-C106F82AC835}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F283BF2A-F893-4F92-B64B-C106F82AC835}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F283BF2A-F893-4F92-B64B-C106F82AC835}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CD0D7B4-9DA1-4322-AB84-7D53AEA3BD76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD0D7B4-9DA1-4322-AB84-7D53AEA3BD76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD0D7B4-9DA1-4322-AB84-7D53AEA3BD76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD0D7B4-9DA1-4322-AB84-7D53AEA3BD76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
