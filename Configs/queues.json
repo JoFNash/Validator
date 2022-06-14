@@ -1,0 +1,62 @@
+{
+  "FullnameRequestsQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "FullnameRequests"
+  },
+  "FullnameRepliesQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "FullnameReplies"
+  },
+  "PhoneRequestsQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "PhoneRequests"
+  },
+  "PhoneRepliesQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "PhoneReplies"
+  },
+  "EmailRequestsQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "EmailRequests"
+  },
+  "EmailRepliesQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "EmailReplies"
+  },
+  "AddressRequestsQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "AddressRequests"
+  },
+  "AddressRepliesQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "AddressReplies"
+  },
+  "PassportRequestsQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "PassportRequests"
+  },
+  "PassportRepliesQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "PassportReplies"
+  },
+  "BirthdateRequestsQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "BirthdateRequests"
+  },
+  "BirthdateRepliesQueue" :
+  {
+    "HostName" : "localhost",
+    "QueueName" : "BirthdateReplies"
+  }
+}

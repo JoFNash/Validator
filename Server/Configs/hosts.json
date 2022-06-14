@@ -1,0 +1,20 @@
+{
+  "FullnameValidator": {
+    "HostName": "https://localhost:7067"
+  },
+  "PhoneNumbersValidator": {
+    "HostName": "https://localhost:7094"
+  },
+  "EmailsValidator": {
+    "HostName": "https://localhost:7071"
+  },
+  "AddressesValidator": {
+    "HostName": "https://localhost:7058"
+  },
+  "PassportValidator": {
+    "HostName": "https://localhost:7171"
+  },
+  "BirthDateValidator": {
+    "HostName": "https://localhost:7052"
+  }
+}

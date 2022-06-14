@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Protobuf Include="Protos\validate.proto">
+      <Protobuf Include="..\Protos\validate.proto">
         <GrpcServices>Client</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
