@@ -48,7 +48,7 @@
             <StackPanel Grid.Row="1" MinHeight="90" Background="WhiteSmoke" Orientation="Vertical" Margin="2">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Фамилия " Foreground="Teal" FontSize="13"></Label>
-                    <TextBox Text="{Binding SurenameProperty, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Text="{Binding SurnameProperty, UpdateSourceTrigger=PropertyChanged}"
                              x:Name="SurenameTextBox"
                              FontSize="13"
                              MaxHeight="20"

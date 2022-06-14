@@ -107,7 +107,7 @@ public class ValidateService : Validate.ValidateBase
         {
             reply.Addresses.Add(address);
         }
-
+        
         return await Task.FromResult(reply);
     }
 }    
