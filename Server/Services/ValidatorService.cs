@@ -47,24 +47,66 @@ public class ValidateService : Validate.ValidateBase
             Name = request.Fullname.Name, 
             Surname = request.Fullname.Surname, 
             Patronymic = request.Fullname.Patronymic
-        });
+        }, cancellationToken: _token.Token);
         
         var passportReply = _passportClient.ValidatePassportAsync(new PassportRequest
         {
             Passport = request.Passport
-        });
+        }, cancellationToken: _token.Token);
         
         var birthDateReply = _birthDateClient.ValidateBirthDateAsync(new BirthDateRequest
         {
             BirthDate = request.BirthDate
-        });
+        }, cancellationToken: _token.Token);
 
+        var phoneNumbersRequest = new PhoneNumbersRequest();
+        foreach (var number in request.PhoneNumbers)
+        {
+            phoneNumbersRequest.PhoneNumbers.Add(number);
+        }
+        
+        var phoneNumbersReply = 
+            _phoneNumbersClient.ValidatePhoneNumbersAsync(phoneNumbersRequest, cancellationToken: _token.Token);
+        
+        var emailsRequest = new EmailsRequest();
+        foreach (var email in request.Emails)
+        {
+            emailsRequest.Emails.Add(email);
+        }
+        
+        var emailsReply = 
+            _emailsClient.ValidateEmailsAsync(emailsRequest, cancellationToken: _token.Token);
+        
+        var addressesRequest = new AddressesRequest();
+        foreach (var address in request.Addresses)
+        {
+            addressesRequest.Addresses.Add(address);
+        }
+        
+        var addressesReply = 
+            _addressesClient.ValidateAddressesAsync(addressesRequest, cancellationToken: _token.Token);
+        
         var reply = new DataReply
         {
             Fullname = await fullnameReply,
             Passport = (await passportReply).Passport,
             BirthDate = (await birthDateReply).BirthDate
         };
+
+        foreach (var number in (await phoneNumbersReply).PhoneNumbers)
+        {
+            reply.PhoneNumbers.Add(number);
+        }
+        
+        foreach (var email in (await emailsReply).Emails)
+        {
+            reply.Emails.Add(email);
+        }
+        
+        foreach (var address in (await addressesReply).Addresses)
+        {
+            reply.Addresses.Add(address);
+        }
 
         return await Task.FromResult(reply);
     }
