@@ -25,7 +25,8 @@ public class ValidatePhoneNumbersService : ValidatePhoneNumbers.ValidatePhoneNum
             if (!regex.IsMatch(number))
             {
                 numberTmp.IsValid = false;
-                numberTmp.Comment = "Некорректный номер телефона!";
+                numberTmp.Comment = "Номер телефона должен иметь один из следующих российских форматов: " +
+                                    "\n +7(***)***-**-** \n 8********** \n 7(***)*******.";
             }
             else
             {

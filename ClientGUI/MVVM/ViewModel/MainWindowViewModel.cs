@@ -76,25 +76,30 @@ namespace ClientGUI.MVVM.ViewModel
             
         }
 
+        private void ShowMessageBox(string message, string header)
+        {
+            MessageBox.Show(message, header, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
         private void WriteAboutMistakes(DataReplyWPF reply)
         {
             bool myBool = true;
             /* ФИО */
             if (!reply.Fullname.Surname.IsValid)
             {
-                MessageBox.Show(reply.Fullname.Surname.Comment);
+                ShowMessageBox(reply.Fullname.Surname.Comment, "Ошибка в фамилии");
                 myBool = false;
             }
 
             if (!reply.Fullname.Name.IsValid)
             {
-                MessageBox.Show(reply.Fullname.Name.Comment);
+                ShowMessageBox(reply.Fullname.Name.Comment, "Ошибка в имени");
                 myBool = false;
             }
             
             if (!reply.Fullname.Patronymic.IsValid)
             {
-                MessageBox.Show(reply.Fullname.Patronymic.Comment);
+                ShowMessageBox(reply.Fullname.Patronymic.Comment, "Ошибка в отчестве");
                 myBool = false;
             }
             
@@ -102,7 +107,9 @@ namespace ClientGUI.MVVM.ViewModel
             {
                 if (!reply.PhoneNumbers[i].IsValid)
                 {
-                    MessageBox.Show($"Телефон {reply.PhoneNumbers[i].Value} введен некорректно :(");
+                    ShowMessageBox($"Телефон {reply.PhoneNumbers[i].Value} введен некорректно :( \n" + 
+                                   reply.PhoneNumbers[i].Comment, 
+                        "Ошибка в графе \"Номер(-а) телефона(-ов)\" ");
                     myBool = false;
                 }
             }
@@ -111,7 +118,9 @@ namespace ClientGUI.MVVM.ViewModel
             {
                 if (!reply.Emails[i].IsValid)
                 {
-                    MessageBox.Show($"Электронная почта {reply.Emails[i].Value} введена некорректно :(");
+                    ShowMessageBox($"Электронная почта {reply.Emails[i].Value} введена некорректно :( \n" + 
+                                   reply.Emails[i].Comment, 
+                        "Ошибка в графе \"Электронная(-ые) почта(-ы)\" ");
                     myBool = false;
                 }
             }
@@ -120,26 +129,26 @@ namespace ClientGUI.MVVM.ViewModel
             {
                 if (!reply.Addresses[i].IsValid)
                 {
-                    MessageBox.Show($"Адрес {reply.Addresses[i].Value} введен некорректно :(");
+                    ShowMessageBox($"Адрес {reply.Addresses[i].Value} введен некорректно :(", "Ошибка в графе \"Адрес(-а)\" ");
                     myBool = false;
                 }
             }
 
             if (!reply.Passport.IsValid)
             {
-                MessageBox.Show(reply.Passport.Comment);
+                ShowMessageBox(reply.Passport.Comment, "Ошибка в графе \"Номер паспорта\"");
                 myBool = false;
             }
             
             if (!reply.BirthDate.IsValid)
             {
-                MessageBox.Show(reply.BirthDate.Comment);
+                ShowMessageBox(reply.BirthDate.Comment, "Ошибка в графе \"Дата рождения\"");
                 myBool = false;
             }
 
             if (myBool)
             {
-                MessageBox.Show("Все данные введены корректно! " + "Мы Вам обязательно перезвоним :)");
+                MessageBox.Show(  "Мы Вам обязательно перезвоним :)", "Все данные введены корректно! ", MessageBoxButton.YesNo);
                 Application.Current.Shutdown();
             }
         }
@@ -162,7 +171,7 @@ namespace ClientGUI.MVVM.ViewModel
             }
             catch
             {
-                MessageBox.Show("Вы ввели время хреново!");
+                MessageBox.Show("Вы ввели время хреново!", "Ошибка в графе \" Дата рождения\"", MessageBoxButton.OK, MessageBoxImage.Error);
                 time = DateTime.UnixEpoch;
             }
             request.BirthDate = DateTime.SpecifyKind(time, DateTimeKind.Utc)
