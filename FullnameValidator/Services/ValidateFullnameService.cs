@@ -21,7 +21,7 @@ public class ValidateFullnameService : ValidateFullname.ValidateFullnameBase
         if (!regex.IsMatch(request.Name))
         {
             name.IsValid = false;
-            name.Comment = "Wrong name format";
+            name.Comment = "Имя должно содержать латинские буквы и начинаться с большой буквы.";
         }
         else
         {
@@ -32,7 +32,7 @@ public class ValidateFullnameService : ValidateFullname.ValidateFullnameBase
         if (!regex.IsMatch(request.Surname))
         {
             surname.IsValid = false;
-            surname.Comment = "Wrong surname format";
+            surname.Comment = "Фамилия должна содержать латинские буквы и начинаться с большой буквы.";
         }
         else
         {
@@ -43,7 +43,7 @@ public class ValidateFullnameService : ValidateFullname.ValidateFullnameBase
         if (!regex.IsMatch(request.Patronymic))
         {
             patronymic.IsValid = false;
-            patronymic.Comment = "Wrong patronymic format";
+            patronymic.Comment = "Отчество должно содержать латинские буквы и начинаться с большой буквы.";
         }
         else
         {

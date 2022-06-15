@@ -28,7 +28,7 @@ public class ValidatePassportService : ValidatePassport.ValidatePassportBase
         if (!regex.IsMatch(request.Passport))
         {
             reply.Passport.IsValid = false;
-            reply.Passport.Comment = "Wrong passport format";
+            reply.Passport.Comment = "В поле номер паспорта введите: <серия(4 знака)_номер(6 знаков)>";
         } 
         else
         {

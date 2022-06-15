@@ -124,7 +124,7 @@
                          MinWidth="123"
                          MaxHeight="20"
                          MinHeight="20"
-                         MaxLength="6"> <!-- какой кайф! -->
+                         MaxLength="11"> <!-- какой кайф! -->
                 </TextBox>
             </StackPanel>
             

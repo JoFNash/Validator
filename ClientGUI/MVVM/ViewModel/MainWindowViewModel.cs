@@ -9,6 +9,7 @@ using ClientGUI.MVVM.Core.ViewModel;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Net.Client;
 using ClientGRPC;
+using Server;
 using StructsWPF;
 
 namespace ClientGUI.MVVM.ViewModel
@@ -75,6 +76,74 @@ namespace ClientGUI.MVVM.ViewModel
             
         }
 
+        private void WriteAboutMistakes(DataReplyWPF reply)
+        {
+            bool myBool = true;
+            /* ФИО */
+            if (!reply.Fullname.Surname.IsValid)
+            {
+                MessageBox.Show(reply.Fullname.Surname.Comment);
+                myBool = false;
+            }
+
+            if (!reply.Fullname.Name.IsValid)
+            {
+                MessageBox.Show(reply.Fullname.Name.Comment);
+                myBool = false;
+            }
+            
+            if (!reply.Fullname.Patronymic.IsValid)
+            {
+                MessageBox.Show(reply.Fullname.Patronymic.Comment);
+                myBool = false;
+            }
+            
+            for (int i = 0; i < reply.PhoneNumbers.Count; i++)
+            {
+                if (!reply.PhoneNumbers[i].IsValid)
+                {
+                    MessageBox.Show($"Телефон {reply.PhoneNumbers[i].Value} введен некорректно :(");
+                    myBool = false;
+                }
+            }
+            
+            for (int i = 0; i < reply.Emails.Count; i++)
+            {
+                if (!reply.Emails[i].IsValid)
+                {
+                    MessageBox.Show($"Электронная почта {reply.Emails[i].Value} введена некорректно :(");
+                    myBool = false;
+                }
+            }
+            
+            for (int i = 0; i < reply.Addresses.Count; i++)
+            {
+                if (!reply.Addresses[i].IsValid)
+                {
+                    MessageBox.Show($"Адрес {reply.Addresses[i].Value} введен некорректно :(");
+                    myBool = false;
+                }
+            }
+
+            if (!reply.Passport.IsValid)
+            {
+                MessageBox.Show(reply.Passport.Comment);
+                myBool = false;
+            }
+            
+            if (!reply.BirthDate.IsValid)
+            {
+                MessageBox.Show(reply.BirthDate.Comment);
+                myBool = false;
+            }
+
+            if (myBool)
+            {
+                MessageBox.Show("Все данные введены корректно! " + "Мы Вам обязательно перезвоним :)");
+                Application.Current.Shutdown();
+            }
+        }
+
         private async void StartValidatorButtonMethod(object o)
         {
             ValidatorStartedProperty = false;
@@ -86,13 +155,27 @@ namespace ClientGUI.MVVM.ViewModel
             request.Fullname.Surname = SurnameProperty;
             request.Fullname.Patronymic = PatronymicProperty;
             request.Passport = PassportNumberProperty;
-            request.BirthDate = DateTime.SpecifyKind(DateTime.Parse(DateBirthdayProperty), DateTimeKind.Utc)
+            DateTime time;
+            try
+            {
+                time = DateTime.Parse(DateBirthdayProperty);
+            }
+            catch
+            {
+                MessageBox.Show("Вы ввели время хреново!");
+                time = DateTime.UnixEpoch;
+            }
+            request.BirthDate = DateTime.SpecifyKind(time, DateTimeKind.Utc)
                 .ToTimestamp();
             SplitProperties();
             request.PhoneNumbers = _telephoneNumbers;
             request.Emails = _emails;
             request.Addresses = _addresses;
+            
             var reply = _client.Validate(request);
+
+            WriteAboutMistakes(reply);
+
         }
     }
 }

@@ -25,7 +25,7 @@ public class ValidateEmailsService : ValidateEmails.ValidateEmailsBase
             if (!regex.IsMatch(email))
             {
                 emailTmp.IsValid = false;
-                emailTmp.Comment = "Wrong email format";
+                emailTmp.Comment = "Формат почты должен представлять из себя: <имя_почты@почта.ru>.";
             }
             else
             {

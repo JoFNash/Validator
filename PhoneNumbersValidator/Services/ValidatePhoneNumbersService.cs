@@ -17,7 +17,7 @@ public class ValidatePhoneNumbersService : ValidatePhoneNumbers.ValidatePhoneNum
     public override Task<PhoneNumbersReply> ValidatePhoneNumbers(PhoneNumbersRequest request, ServerCallContext context)
     {
         var reply = new PhoneNumbersReply();
-        var regex = new Regex("\\+?\\d+([\\(\\s\\-]?\\d+[\\)\\s\\-]?[\\d\\s\\-]+)?");
+        var regex = new Regex("^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$");
         foreach (var number in request.PhoneNumbers)
         {
             var numberTmp = new ValidateString();
@@ -25,7 +25,7 @@ public class ValidatePhoneNumbersService : ValidatePhoneNumbers.ValidatePhoneNum
             if (!regex.IsMatch(number))
             {
                 numberTmp.IsValid = false;
-                numberTmp.Comment = "Wrong phone number format";
+                numberTmp.Comment = "Некорректный номер телефона!";
             }
             else
             {
